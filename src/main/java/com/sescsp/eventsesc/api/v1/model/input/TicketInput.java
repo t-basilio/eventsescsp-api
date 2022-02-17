@@ -1,6 +1,7 @@
 package com.sescsp.eventsesc.api.v1.model.input;
 
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ public class TicketInput {
     @NotNull
     private CategoryInputId categoria;
 
+    @ApiModelProperty(example = "15", required = true, position = 2)
     @NotNull
     private BigDecimal valor;
 }

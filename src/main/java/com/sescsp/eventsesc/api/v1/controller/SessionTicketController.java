@@ -4,6 +4,7 @@ import com.sescsp.eventsesc.api.v1.assembler.TicketModelAssembler;
 import com.sescsp.eventsesc.api.v1.assembler.TicketModelDisassembler;
 import com.sescsp.eventsesc.api.v1.model.TicketModel;
 import com.sescsp.eventsesc.api.v1.model.input.TicketInput;
+import com.sescsp.eventsesc.api.v1.openapi.controller.SessionTicketControllerOpenApi;
 import com.sescsp.eventsesc.domain.exception.TicketDoNotBelongSession;
 import com.sescsp.eventsesc.domain.model.Event;
 import com.sescsp.eventsesc.domain.model.Session;
@@ -11,6 +12,7 @@ import com.sescsp.eventsesc.domain.model.Ticket;
 import com.sescsp.eventsesc.domain.repository.TicketRepository;
 import com.sescsp.eventsesc.domain.service.SessionService;
 import com.sescsp.eventsesc.domain.service.TicketService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/v1/events/{eventId}/sessions/{sessionId}/tickets", produces = MediaType.APPLICATION_JSON_VALUE)
-public class SessionTicketController {
+public class SessionTicketController implements SessionTicketControllerOpenApi {
 
     @Autowired
     private SessionService sessionService;
@@ -38,6 +40,7 @@ public class SessionTicketController {
     @Autowired
     private TicketModelDisassembler ticketModelDisassembler;
 
+    @Override
     @GetMapping
     public List<TicketModel> list(@PathVariable Long eventId, @PathVariable Long sessionId) {
         Session session = sessionService.findSessionByEventOrFail(eventId, sessionId);
@@ -46,6 +49,7 @@ public class SessionTicketController {
         return ticketModelAssembler.toCollectionModel(tickets);
     }
 
+    @Override
     @GetMapping("/{ticketId}")
     public TicketModel search (@PathVariable Long eventId, @PathVariable Long sessionId, @PathVariable Long ticketId) {
         Session session = sessionService.findSessionByEventOrFail(eventId, sessionId);
@@ -57,6 +61,7 @@ public class SessionTicketController {
         return ticketModelAssembler.toModel(ticket);
     }
 
+    @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TicketModel add (@PathVariable Long eventId, @PathVariable Long sessionId,

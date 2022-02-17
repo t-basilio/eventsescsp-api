@@ -22,7 +22,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
 
 ## 📦️ Baixar e Executar o MySQL
 
-Antes de executar a aplicação é necessário possuir o MySQL instalado ou possuir a instancia de
+Antes de executar a aplicação além da versão 11 do Java, também é necessário possuir o MySQL instalado ou possuir a instancia de
 um container excutando uma imagem do MySQL na porta: 3306
 
 Abaixo os comandos para a intalaçao do MyQSL caso esteja utilizando linux
@@ -59,5 +59,13 @@ configurar essas credenciais no arquivo **application-dev.properties** nas vari�
     # Iniciar a aplicaçao (localhost porta 8080)
     $ java -jar target/eventsesc-api-0.0.1-SNAPSHOT.jar
 ```
+---
+Para testar e consultar a documentação dessa aplicação, após a execução, você pode 
+acessar através de um browser o endereço:  http://localhost:8080/swagger-ui.html
+
+<h1>
+    <img src="./public/swagger-demo.png" >
+</h1>
+
 ---
 Desenvolvido por Thiago Basilio no processo seletivo do [Sesc SP](https://www.sescsp.org.br/) 🚀️ 

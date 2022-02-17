@@ -43,10 +43,10 @@ public class Problem {
     @Getter
     public static class Object {
 
-        @ApiModelProperty("nome")
+        @ApiModelProperty(example = "nome")
         private String name;
 
-        @ApiModelProperty("O nome é obrigatório")
+        @ApiModelProperty(example = "O nome é obrigatório")
         private String userMessage;
     }
 }
